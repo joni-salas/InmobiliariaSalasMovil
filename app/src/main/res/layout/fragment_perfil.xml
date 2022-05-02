@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.perfil.PerfilFragment"
+    android:background="@drawable/fondo_degradado">
+
+
+    <EditText
+        android:id="@+id/etDniPerfil"
+        android:layout_width="338dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bt_white"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Dni"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etNombrePerfil"
+        android:layout_width="338dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        android:background="@drawable/bt_white"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        android:enabled="false"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDniPerfil" />
+
+    <EditText
+        android:id="@+id/etApellidoPerfil"
+        android:layout_width="338dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Apellido"
+        android:inputType="textPersonName"
+        android:background="@drawable/bt_white"
+        android:enabled="false"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNombrePerfil" />
+
+    <EditText
+        android:id="@+id/etEmailPerfil"
+        android:layout_width="338dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:enabled="false"
+        android:background="@drawable/bt_white"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etApellidoPerfil" />
+
+    <EditText
+        android:id="@+id/etTelefonoPerfil"
+        android:layout_width="338dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Telefono"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:background="@drawable/bt_white"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etContraseñaPerfil" />
+
+    <EditText
+        android:id="@+id/etContraseñaPerfil"
+        android:layout_width="337dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:enabled="false"
+        android:inputType="textPassword"
+        android:background="@drawable/bt_white"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailPerfil" />
+
+    <Button
+        android:id="@+id/btEditarPerfil"
+        android:layout_width="201dp"
+        android:layout_height="59dp"
+        android:backgroundTint="@color/primary_text"
+        android:text="Editar"
+        android:textColor="@color/primary_light"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTelefonoPerfil"
+        app:layout_constraintVertical_bias="0.125" />
+</androidx.constraintlayout.widget.ConstraintLayout>
