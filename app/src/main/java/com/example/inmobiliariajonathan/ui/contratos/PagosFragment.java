@@ -20,6 +20,7 @@ import com.example.inmobiliariajonathan.R;
 import com.example.inmobiliariajonathan.modelo.Pago;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PagosFragment extends Fragment {
 
@@ -45,9 +46,9 @@ public class PagosFragment extends Fragment {
     private void inicializar(View root) {
         rvPagosContrato = root.findViewById(R.id.rvPagosContrato);
         pagosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagosViewModel.class);
-        pagosViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
+        pagosViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<List<Pago>>() {
             @Override
-            public void onChanged(ArrayList<Pago> pagos) {
+            public void onChanged(List<Pago> pagos) {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false);
                 rvPagosContrato.setLayoutManager(gridLayoutManager);
                 adapter = new PagosAdapter(context,pagos,getLayoutInflater());

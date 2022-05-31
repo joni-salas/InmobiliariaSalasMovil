@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.example.inmobiliariajonathan.R;
 import com.example.inmobiliariajonathan.modelo.Contrato;
 
+import java.sql.Date;
+
 public class DetalleContratoFragment extends Fragment {
 
     private DetalleContratoViewModel mViewModel;
@@ -57,12 +59,22 @@ public class DetalleContratoFragment extends Fragment {
         mViewModel.getContrato().observe(getActivity(), new Observer<Contrato>() {
             @Override
             public void onChanged(Contrato contrato) {
-                tvCodigoContrato.setText(contrato.getIdContrato() + "");
-                tvFechaInicio.setText(contrato.getFechaInicio());
-                tvFechaFinalizacion.setText(contrato.getFechaFin());
-                tvMontoDeAlquier.setText("$ " +contrato.getMontoAlquiler());
-                tvInquilinoContrato.setText(contrato.getInquilino().toString());
-                tvInmuebleContrato.setText(contrato.getInmueble().getDireccion());
+                if(contrato != null){
+                    tvCodigoContrato.setText(contrato.getIdContrato()+ "");
+                    tvFechaInicio.setText(contrato.getFechaInicio().toString());
+                    tvFechaFinalizacion.setText(contrato.getFechaFin());
+                    tvMontoDeAlquier.setText("$ " +contrato.getMontoAlquiler());
+                    tvInquilinoContrato.setText(contrato.getInquilino().toString());
+                    tvInmuebleContrato.setText(contrato.getInmueble().getDireccion());
+                }else{
+                    tvCodigoContrato.setText( "");
+                    tvFechaInicio.setText("");
+                    tvFechaFinalizacion.setText("");
+                    tvMontoDeAlquier.setText("$ " +"");
+                    tvInquilinoContrato.setText("");
+                    tvInmuebleContrato.setText("");
+                }
+
             }
         });
 
@@ -70,7 +82,12 @@ public class DetalleContratoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Contrato con = new Contrato();
-                con.setIdContrato(Integer.parseInt(tvCodigoContrato.getText().toString()));
+                if(tvCodigoContrato.getText().equals("")){
+                    con.setIdContrato(0);
+                }else{
+                    con.setIdContrato(Integer.parseInt(tvCodigoContrato.getText().toString()));
+                }
+
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("contrato", con);
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main).navigate(R.id.pagosFragment, bundle);

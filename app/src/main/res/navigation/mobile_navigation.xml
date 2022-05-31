@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_nav_inmueble_to_inmuebleFragment"
             app:destination="@id/inmuebleFragment" />
+        <action
+            android:id="@+id/action_nav_inmueble_to_crarInmuebleFragment"
+            app:destination="@id/crarInmuebleFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_inquilino"
@@ -87,5 +90,14 @@
         <action
             android:id="@+id/action_inquilinoFragment_to_nav_inquilino"
             app:destination="@id/nav_inquilino" />
+    </fragment>
+    <fragment
+        android:id="@+id/crarInmuebleFragment"
+        android:name="com.example.inmobiliariajonathan.ui.inmuebles.CrearInmuebleFragment"
+        android:label="Crear Inmueble"
+        tools:layout="@layout/fragment_crear_inmueble" >
+        <action
+            android:id="@+id/action_crarInmuebleFragment_to_nav_inmueble2"
+            app:destination="@id/nav_inmueble" />
     </fragment>
 </navigation>

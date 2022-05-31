@@ -43,9 +43,11 @@ public class InmueblesAlquiladosAdapter extends RecyclerView.Adapter<InmueblesAl
 
     @Override
     public void onBindViewHolder(@NonNull InmueblesAlquiladosAdapter.ViewHolder holder, int position) {
-        holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
+        Inmueble inmueble = inmuebles.get(position);
+        holder.tvDireccion.setText(inmueble.getDireccion());
+
         Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
+                .load("http://192.168.0.172:45455" + inmueble.getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivImagenInmueble);
     }

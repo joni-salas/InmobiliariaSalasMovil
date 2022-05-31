@@ -12,12 +12,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.inmobiliariajonathan.modelo.Propietario;
+import com.example.inmobiliariajonathan.request.ApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,6 +34,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.inmobiliariajonathan.databinding.ActivityMainBinding;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private LeeSensor leeSensor;
     private int bandera = 1;
+    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -68,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setItemIconTintList(null);
 
+        //inicializo el mainActivityViewModel
+        mainActivityViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainActivityViewModel.class);
+        //llamo a inicializarEncabezado pasandole el navigationView
+        mainActivityViewModel.inicializarEncabezado(navigationView);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

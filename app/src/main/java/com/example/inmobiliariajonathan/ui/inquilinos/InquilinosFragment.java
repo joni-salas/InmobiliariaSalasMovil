@@ -23,6 +23,7 @@ import com.example.inmobiliariajonathan.ui.inmuebles.InmuebleAdapter;
 import com.example.inmobiliariajonathan.ui.inmuebles.InmueblesViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InquilinosFragment extends Fragment {
 
@@ -34,7 +35,7 @@ public class InquilinosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_inmuebles, container, false);
+        View root = inflater.inflate(R.layout.inquilinos_fragment, container, false);
         context = root.getContext();
         inicializar(root);
         return root;
@@ -43,9 +44,9 @@ public class InquilinosFragment extends Fragment {
         rvInmuebles = view.findViewById(R.id.rvInmuebles);
 
         inquilinosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinosViewModel.class);
-        inquilinosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+        inquilinosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
+            public void onChanged(List<Inmueble> inmuebles) {
                 GridLayoutManager gridLayoutManager= new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
                 rvInmuebles.setLayoutManager(gridLayoutManager);
                 adapter = new InquilinoAdapter(context, inmuebles, getLayoutInflater());

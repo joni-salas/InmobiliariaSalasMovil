@@ -22,6 +22,7 @@ public class PerfilFragment extends Fragment {
     private EditText etDni, etNombre, etApellido, etTelefono, etContraseña, etMail;
     private Button btEditar;
     PerfilViewModel perfilViewModel;
+    private Propietario propietarioCompleto;
 
     //private FragmentPerfilBinding binding;
 
@@ -35,18 +36,19 @@ public class PerfilFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_perfil, container, false);
         inicializarVista(root);
 
-        perfilViewModel.getUsuario().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
+        perfilViewModel.getUsuarioMutable().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
             @Override
             public void onChanged(Propietario propietario) {
-                etDni.setText(propietario.getDni().toString());
+                propietarioCompleto = propietario;
+                etDni.setText(propietario.getDni());
                 etApellido.setText(propietario.getApellido());
                 etNombre.setText(propietario.getNombre());
                 etTelefono.setText(propietario.getTelefono());
                 etMail.setText(propietario.getEmail());
-                etContraseña.setText(propietario.getContraseña());
+                //etContraseña.setText(propietario.getContraseña());
             }
         });
-        perfilViewModel.getEstado().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        perfilViewModel.getEstadoMutable().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 etDni.setEnabled(aBoolean);
@@ -86,12 +88,12 @@ public class PerfilFragment extends Fragment {
         btEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Propietario propietario = new Propietario();
+                Propietario propietario = propietarioCompleto;
                 propietario.setNombre(etNombre.getText().toString());
                 propietario.setApellido(etApellido.getText().toString());
-                propietario.setDni(Long.parseLong(etDni.getText().toString()));
+                propietario.setDni((etDni.getText().toString()));
                 propietario.setTelefono(etTelefono.getText().toString());
-                propietario.setEmail(etTelefono.getText().toString());
+                propietario.setEmail(etMail.getText().toString());
                 propietario.setContraseña(etContraseña.getText().toString());
 
                 String texto=btEditar.getText().toString();

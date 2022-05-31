@@ -43,10 +43,12 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Inmueble inmueble = inmuebles.get(position);
+
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
         Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
+                .load("http://192.168.0.172:45455" + inmueble.getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivImagenInmueble);
     }

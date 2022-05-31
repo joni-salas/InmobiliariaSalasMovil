@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_degradado"
+    tools:context=".ui.perfil.PerfilFragment">
+
+
+    <EditText
+        android:id="@+id/etAmbientes"
+        android:layout_width="347dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/bt_white"
+        android:ems="10"
+        android:hint="Ambientes"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Superficie"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/etSuperficie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etTipo"
+        android:layout_width="342dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bt_white"
+        android:ems="10"
+        android:hint="Tipo"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/btCargarImagen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btCargarImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="Cargar imagen"
+        app:layout_constraintBottom_toTopOf="@+id/btCrear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toEndOf="@+id/imagenView" />
+
+    <Button
+        android:id="@+id/btCrear"
+        android:layout_width="201dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary_text"
+        android:text="Crear"
+
+
+        android:textColor="@color/primary_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagenView"
+        android:layout_width="214dp"
+        android:layout_height="138dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/btCrear"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="126dp"
+        android:layout_height="18dp"
+        android:text="DIRECCION"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/etDireccion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
+
+    <EditText
+        android:id="@+id/etSuperficie"
+        android:layout_width="343dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bt_white"
+        android:ems="10"
+        android:hint="Superficie"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/etPrecio"
+        android:layout_width="340dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/bt_white"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Precio"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/etPrecio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Tipo"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/etTipo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="73dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="8dp"
+        android:text="Ambientes"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/etAmbientes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etDireccion"
+        android:layout_width="344dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bt_white"
+        android:ems="10"
+        android:freezesText="false"
+        android:hint="Direccion"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/secondary_text"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.978"
+        tools:ignore="TouchTargetSizeCheck" />
+    <![CDATA[
+
+
+
+    app:layout_constraintVertical_bias="1.0" />
+
+]]>
+</androidx.constraintlayout.widget.ConstraintLayout>

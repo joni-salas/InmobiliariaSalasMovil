@@ -39,12 +39,15 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    //seteo a cada inmueble su direccion + precio + imagen
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
-        holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
+        Inmueble inmueble = inmuebles.get(position);
+
+        holder.tvDireccion.setText(inmueble.getDireccion());
+        holder.tvPrecio.setText("$" + inmueble.getPrecio());
         Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
+                .load("http://192.168.0.172:45455" + inmueble.getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivImagenInmueble);
     }

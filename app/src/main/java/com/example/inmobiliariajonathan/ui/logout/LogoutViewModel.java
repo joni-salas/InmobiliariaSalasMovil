@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -20,6 +21,7 @@ public class LogoutViewModel extends AndroidViewModel {
 
     private Context context;
     private Application application;
+    private SharedPreferences getSharedPreferences;
 
     public LogoutViewModel(@NonNull Application application) {
         super(application);
@@ -42,6 +44,9 @@ public class LogoutViewModel extends AndroidViewModel {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        //Elimino los datos de shared preferends (TOKEN) al cerrar session
+                        SharedPreferences.Editor editor = context.getSharedPreferences("datos.dat",0).edit();
+                        editor.clear().apply();
                         System.exit(0);
 
                     }

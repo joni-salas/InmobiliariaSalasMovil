@@ -29,12 +29,9 @@ public class InquilinoFragment extends Fragment {
     private TextView TVInqCodigo;
     private TextView TVInqNombre;
     private TextView TVInqApellido;
-    private TextView TVLugarTrabajo;
     private TextView TVInqDni;
     private TextView TVInqEmail;
     private TextView TVInqTelefono;
-    private TextView TvInqGaraTelefono;
-    private TextView TVInqGarante;
 
 
     @Override
@@ -49,12 +46,9 @@ public class InquilinoFragment extends Fragment {
         TVInqCodigo = view.findViewById(R.id.TVInqCodigo);
         TVInqNombre = view.findViewById(R.id.TVInqNombre);
         TVInqApellido = view.findViewById(R.id.TVInqApellido);
-        TVLugarTrabajo = view.findViewById(R.id.TVLugarTrabajo);
         TVInqDni = view.findViewById(R.id.TVInqDni);
         TVInqEmail = view.findViewById(R.id.TVInqEmail);
         TVInqTelefono = view.findViewById(R.id.TVInqTelefono);
-        TvInqGaraTelefono = view.findViewById(R.id.TvInqGaraTelefono);
-        TVInqGarante = view.findViewById(R.id.TVInqGarante);
 
         inquilinoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinoViewModel.class);
         inquilinoViewModel.getInquilino().observe(getActivity(), new Observer<Inquilino>() {
@@ -65,12 +59,9 @@ public class InquilinoFragment extends Fragment {
                     TVInqCodigo.setText(inquilino.getIdInquilino() + "");
                     TVInqNombre.setText(inquilino.getNombre());
                     TVInqApellido.setText(inquilino.getApellido());
-                    TVLugarTrabajo.setText(inquilino.getLugarDeTrabajo());
                     TVInqDni.setText(inquilino.getDNI()+"");
                     TVInqEmail.setText(inquilino.getEmail());
                     TVInqTelefono.setText(inquilino.getTelefono());
-                    TvInqGaraTelefono.setText(inquilino.getTelefonoGarante());
-                    TVInqGarante.setText(inquilino.getNombreGarante());
                 }
 
 

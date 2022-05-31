@@ -1,8 +1,14 @@
 package com.example.inmobiliariajonathan.ui.perfil;
 
+import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,30 +16,39 @@ import androidx.lifecycle.ViewModel;
 import com.example.inmobiliariajonathan.modelo.Propietario;
 import com.example.inmobiliariajonathan.request.ApiClient;
 
-public class PerfilViewModel extends ViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PerfilViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<Boolean> estado;
+    private MutableLiveData<Boolean> estadoMT;
     private MutableLiveData<String> textoBoton;
-    private MutableLiveData<Propietario> usuario;
-    private ApiClient apiClient;
+    private MutableLiveData<Propietario> usuarioMT;
+    private ApiClient.RetrofitService rfs;
+    private ApiClient api;
+    private Context context;
 
 
-    public PerfilViewModel() {
+
+    public PerfilViewModel(@NonNull Application application) {
+        super(application);
+        context = application.getApplicationContext();
         mText = new MutableLiveData<>();
         mText.setValue("Esto es el perfil");
-        apiClient=ApiClient.getApi();
+        rfs=ApiClient.getMyApiClient();
     }
 
     public LiveData<String> getText() {
         return mText;
     }
 
-    public LiveData<Boolean> getEstado(){
-        if(estado==null){
-            estado=new MutableLiveData<>();
+    public LiveData<Boolean> getEstadoMutable(){
+        if(estadoMT==null){
+            estadoMT=new MutableLiveData<>();
         }
-        return estado;
+        return estadoMT;
     }
 
     public LiveData<String> getTextoBoton(){
@@ -42,34 +57,78 @@ public class PerfilViewModel extends ViewModel {
         }
         return textoBoton;
     }
-    public LiveData<Propietario> getUsuario(){
-        if(usuario==null){
-            usuario=new MutableLiveData<>();
+    public LiveData<Propietario> getUsuarioMutable(){
+        if(usuarioMT==null){
+            usuarioMT=new MutableLiveData<>();
         }
-        return usuario;
+        return usuarioMT;
     }
 
     public void accionBoton(String txtBoton,Propietario propietario){
 
         if(txtBoton.equals("Editar")){
             textoBoton.setValue("Guardar");
-            estado.setValue(true);
+            estadoMT.setValue(true);
         }else{
             textoBoton.setValue("Editar");
-            estado.setValue(false);
+            estadoMT.setValue(false);
 
-            apiClient.actualizarPerfil(propietario);
+            //aca llamo al actualizarUSuario
+            actualizarUsuario(propietario);
         }
     }
 
     public void traerDatos(){
+        api = new ApiClient();
+        rfs=ApiClient.getMyApiClient();
+        Call<Propietario> usuarioActual=rfs.getUsuarioActual(api.getToken(context));
 
+        usuarioActual.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()){
+                    Log.d("Propietario: ", response.body().getNombre());
+                    usuarioMT.setValue(response.body());  //seteo el el Propietario en el mutable usuario
 
-        usuario.setValue(apiClient.obtenerUsuarioActual());
+                }else{
+                    Log.d("Propietario: ", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Log.d("Error onFailure: ", t.getLocalizedMessage());
+            }
+        });
 
     }
 
+    public void actualizarUsuario(Propietario propietario){
+        api = new ApiClient();
+        rfs=ApiClient.getMyApiClient();
+        Call<Propietario> usuarioActual=rfs.editarPerfil(propietario,api.getToken(context));
+        //Log.d("token: ", api.getToken(context));
+       // Log.d("prop",propietario.getId()+ " " + propietario.getDni() + " "+ propietario.getEstado() +" "+ propietario.getApellido() +" "+ propietario.getNombre());
+        usuarioActual.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()){
 
+                    usuarioMT.setValue(response.body());  //seteo el el Propietario en el mutable usuario
+                    Toast.makeText(context,"Perfil actualizado correctamente",Toast.LENGTH_LONG).show();
+                }else{
+                    Log.d("Error: ", response.message());
+                    Toast.makeText(context,"Error al actualizar Perfil",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Log.d("Error onFailure",t.getLocalizedMessage());
+            }
+        });
+
+    }
 
 
 

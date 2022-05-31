@@ -20,6 +20,7 @@ import com.example.inmobiliariajonathan.R;
 import com.example.inmobiliariajonathan.modelo.Inmueble;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContratosFragment extends Fragment {
 
@@ -40,9 +41,10 @@ public class ContratosFragment extends Fragment {
         rvContratos = view.findViewById(R.id.rvContratos);
 
         contratosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(ContratosViewModel.class);
-        contratosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+
+        contratosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
-            public void onChanged(ArrayList<Inmueble> inmuebles) {
+            public void onChanged(List<Inmueble> inmuebles) {
                 GridLayoutManager gridLayoutManager= new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
                 rvContratos.setLayoutManager(gridLayoutManager);
                 adapter = new InmueblesAlquiladosAdapter(context, inmuebles, getLayoutInflater());
