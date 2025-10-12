@@ -1,5 +1,6 @@
 package com.example.inmobiliariajonathan.ui.inmuebles;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.Navigation;
 
+import com.example.inmobiliariajonathan.R;
 import com.example.inmobiliariajonathan.modelo.Inmueble;
 import com.example.inmobiliariajonathan.modelo.Propietario;
 import com.example.inmobiliariajonathan.request.ApiClient;
@@ -64,6 +67,7 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
                 if(response.isSuccessful()){
                     Toast.makeText(context,"Inmueble creado correctamente",Toast.LENGTH_LONG).show();
                     resultado =true;
+                    Navigation.findNavController((Activity) context, R.id.inmuebleFragment).navigate(R.id.nav_inmueble);
                 }else{
                     Log.d("Error OnResponse: ", response.message());
                     Toast.makeText(context,"Error al crear inmueble",Toast.LENGTH_LONG).show();

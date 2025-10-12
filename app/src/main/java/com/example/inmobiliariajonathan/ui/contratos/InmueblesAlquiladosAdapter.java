@@ -47,7 +47,7 @@ public class InmueblesAlquiladosAdapter extends RecyclerView.Adapter<InmueblesAl
         holder.tvDireccion.setText(inmueble.getDireccion());
 
         Glide.with(context)
-                .load("http://192.168.0.172:45455" + inmueble.getImagen())
+                .load("http://192.168.0.112:45455" + inmueble.getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivImagenInmueble);
     }

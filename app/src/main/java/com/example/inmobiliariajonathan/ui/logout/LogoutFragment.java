@@ -41,7 +41,7 @@ public class LogoutFragment extends Fragment {
     public void mostrarDialog(){
         AlertDialog.Builder alertDialog =  new AlertDialog.Builder(this.getContext())
                 .setTitle("Titulo")
-                .setMessage("Desea cerrar la app")
+                .setMessage("Desea cerrar la app?")
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

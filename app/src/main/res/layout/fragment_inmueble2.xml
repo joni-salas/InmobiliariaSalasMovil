@@ -14,21 +14,6 @@
         android:layout_height="wrap_content">
 
 
-        <CheckBox
-            android:id="@+id/cbEstado"
-            android:layout_width="122dp"
-            android:layout_height="48dp"
-            android:text="Disponible"
-            android:enabled="false"
-            android:textColor="#fFFFFFFf"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/ivImagenInmueble"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.467"
-            app:layout_constraintStart_toEndOf="@+id/tvTipo"
-            app:layout_constraintTop_toBottomOf="@+id/tvPrecio"
-            app:layout_constraintVertical_bias="0.282" />
-
         <ImageView
             android:id="@+id/ivImagenInmueble"
             android:layout_width="279dp"
@@ -41,23 +26,79 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tvPrecio"
+            android:id="@+id/tvTipo"
             android:layout_width="128dp"
             android:layout_height="34dp"
-            android:layout_marginEnd="76dp"
-            android:layout_marginBottom="120dp"
-            android:textColor="#9C27B0"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/bt_black"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/ivImagenInmueble"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAmbientes"
+            android:layout_width="134dp"
+            android:layout_height="34dp"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bt_black"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/Precio"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvPrecio"
+            android:layout_width="137dp"
+            android:layout_height="34dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/ivImagenInmueble"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.439"
             app:layout_constraintStart_toEndOf="@+id/tvDireccion"
+            app:layout_constraintTop_toTopOf="@+id/tvDireccion"
+            app:layout_constraintVertical_bias="0.0"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="124dp"
+            android:layout_marginBottom="8dp"
+            android:text="Ambientes"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvAmbientes"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbEstado"
+            android:layout_width="136dp"
+            android:layout_height="34dp"
+            android:background="@drawable/bt_black"
+            android:enabled="false"
+            android:text="Disponible"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/ivImagenInmueble"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toEndOf="@+id/tvTipo"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrecio"
+            app:layout_constraintVertical_bias="0.214" />
 
         <TextView
             android:id="@+id/Precio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="160dp"
+            android:layout_marginEnd="152dp"
             android:layout_marginBottom="8dp"
             android:text="Precio"
             android:textColor="#fFFFFFFf"
@@ -66,56 +107,28 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="128dp"
-            android:text="Ambientes"
-            android:textColor="#fFFFFFFf"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/tvAmbientes"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/tvTipo"
-            android:layout_width="117dp"
-            android:layout_height="23dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="60dp"
-            android:textColor="#9C27B0"
-            app:layout_constraintBottom_toTopOf="@+id/ivImagenInmueble"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tvAmbientes"
-            android:layout_width="131dp"
-            android:layout_height="37dp"
-            android:layout_marginEnd="72dp"
-            android:layout_marginBottom="12dp"
-            android:textColor="#9C27B0"
-            app:layout_constraintBottom_toTopOf="@+id/Precio"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <TextView
             android:id="@+id/tvId"
-            android:layout_width="67dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="12dp"
-            android:textColor="#9C27B0"
+            android:layout_width="126dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/textView6"
             app:layout_constraintEnd_toStartOf="@+id/tvAmbientes"
-            app:layout_constraintHorizontal_bias="0.115"
+            app:layout_constraintHorizontal_bias="0.391"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             tools:layout_constraintStart_toEndOf="@id/guideline3" />
 
         <TextView
             android:id="@+id/tvDireccion"
-            android:layout_width="123dp"
-            android:layout_height="43dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="131dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="36dp"
             android:layout_marginBottom="8dp"
-            android:textColor="#9C27B0"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
@@ -123,18 +136,20 @@
             android:id="@+id/textView12"
             android:layout_width="40dp"
             android:layout_height="18dp"
-            android:layout_marginStart="16dp"
             android:layout_marginBottom="4dp"
             android:text="Tipo"
             android:textSize="16sp"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/tvTipo"
+            app:layout_constraintEnd_toStartOf="@+id/cbEstado"
+            app:layout_constraintHorizontal_bias="0.206"
             app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="83dp"
             android:layout_height="18dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="36dp"
             android:layout_marginBottom="8dp"
             android:text="Dirección"
             android:textColor="#fFFFFFFf"
@@ -146,7 +161,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="36dp"
             android:layout_marginBottom="4dp"
             android:text="Código"
             android:textColor="#fFFFFFFf"
@@ -154,7 +169,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tvId"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/textView28"
-            app:layout_constraintVertical_bias="0.979" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView28"
@@ -162,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Información del inmueble"
-            android:textColor="#9C27B0"
+            android:textColor="#2E2836"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textView13"

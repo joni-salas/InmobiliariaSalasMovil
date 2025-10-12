@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.inmuebles.InmueblesFragment">
+    tools:context=".ui.inmuebles.InmueblesFragment"
+    tools:ignore="ExtraText">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,12 +27,15 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="40dp"
+        android:background="#A01D1E"
         android:contentDescription="TODO"
+        app:backgroundTint="#A01D1E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/agregar_inmueble"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
-    tools:layout_editor_absoluteX="321dp"
-        tools:layout_editor_absoluteY="622dp" />
+        tools:layout_editor_absoluteX="321dp"
+        tools:layout_editor_absoluteY="622dp"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

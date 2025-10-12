@@ -84,7 +84,7 @@ public class InmuebleFragment extends Fragment {
 
 
                 Glide.with(getContext())
-                        .load("http://192.168.0.172:45455" + inmueble.getImagen())
+                        .load("http://192.168.0.112:45455" + inmueble.getImagen())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(ivImagenInmueble);
 

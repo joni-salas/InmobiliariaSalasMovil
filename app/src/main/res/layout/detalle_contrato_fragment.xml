@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Información del Contrato"
-            android:textColor="#9C27B0"
+            android:textColor="#2E2836"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,85 +36,41 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.153"
+            app:layout_constraintHorizontal_bias="0.118"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView28"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintVertical_bias="0.088" />
 
         <TextView
             android:id="@+id/tvCodigoContrato"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-
-            android:textColor="#9C27B0"
+            android:layout_width="218dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
             android:textSize="20dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.016"
             tools:layout_constraintStart_toEndOf="@id/guideline3" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha Inicio"
-            android:textColor="#fFFFFFFf"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.13"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCodigoContrato"
-            app:layout_constraintVertical_bias="0.052" />
 
         <TextView
             android:id="@+id/tvFechaInicio"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-
-            android:textColor="#9C27B0"
+            android:layout_width="221dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
             android:textSize="20dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintHorizontal_bias="0.178"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_constraintStart_toEndOf="@id/guideline3" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha Finalizacion"
-            android:textColor="#fFFFFFFf"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.148"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFechaInicio"
-            app:layout_constraintVertical_bias="0.054" />
-
-        <TextView
-            android:id="@+id/tvFechaFinalizacion"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-
-            android:textColor="#9C27B0"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.019"
             tools:layout_constraintStart_toEndOf="@id/guideline3" />
 
         <TextView
@@ -126,25 +82,85 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.147"
+            app:layout_constraintHorizontal_bias="0.113"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvFechaFinalizacion"
-            app:layout_constraintVertical_bias="0.08" />
+            app:layout_constraintVertical_bias="0.031" />
 
         <TextView
-            android:id="@+id/tvMontoDeAlquier"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-
-            android:textColor="#9C27B0"
-            android:textSize="20dp"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha Inicio"
+            android:textColor="#fFFFFFFf"
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCodigoContrato"
+            app:layout_constraintVertical_bias="0.015" />
+
+        <TextView
+            android:id="@+id/tvFechaFinalizacion"
+            android:layout_width="218dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.176"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintVertical_bias="0.023"
+            tools:layout_constraintStart_toEndOf="@id/guideline3" />
+
+        <TextView
+            android:id="@+id/tvMontoDeAlquier"
+            android:layout_width="216dp"
+            android:layout_height="43dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.174"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.03"
+            tools:layout_constraintStart_toEndOf="@id/guideline3" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha Finalizacion"
+            android:textColor="#fFFFFFFf"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.114"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFechaInicio"
+            app:layout_constraintVertical_bias="0.023" />
+
+        <TextView
+            android:id="@+id/tvInquilinoContrato"
+            android:layout_width="220dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.178"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintVertical_bias="0.037"
             tools:layout_constraintStart_toEndOf="@id/guideline3" />
 
         <TextView
@@ -156,25 +172,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.122"
+            app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMontoDeAlquier"
-            app:layout_constraintVertical_bias="0.114" />
+            app:layout_constraintVertical_bias="0.037" />
 
         <TextView
-            android:id="@+id/tvInquilinoContrato"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-
-            android:textColor="#9C27B0"
+            android:id="@+id/tvInmuebleContrato"
+            android:layout_width="224dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bt_black"
+            android:textColor="#FFFFFF"
             android:textSize="20dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintHorizontal_bias="0.181"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.07"
             tools:layout_constraintStart_toEndOf="@id/guideline3" />
 
         <TextView
@@ -186,26 +202,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.124"
+            app:layout_constraintHorizontal_bias="0.096"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInquilinoContrato"
-            app:layout_constraintVertical_bias="0.226" />
-
-        <TextView
-            android:id="@+id/tvInmuebleContrato"
-            android:layout_width="164dp"
-            android:layout_height="48dp"
-
-            android:textColor="#9C27B0"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_constraintStart_toEndOf="@id/guideline3" />
+            app:layout_constraintVertical_bias="0.064" />
 
         <Button
             android:id="@+id/btIngresar"
@@ -213,13 +213,13 @@
             android:layout_height="63dp"
             android:backgroundTint="@color/primary_text"
             android:text="Pagos"
-            android:textColor="@color/primary_light"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.815"
+            app:layout_constraintHorizontal_bias="0.948"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView28"
-            app:layout_constraintVertical_bias="0.693"></Button>
+            app:layout_constraintVertical_bias="0.941"></Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -34,7 +34,7 @@ import retrofit2.http.Path;
 
 public class ApiClient {
 
-    private static final String URLBASE="http://192.168.0.172:45455/api/";
+    private static final String URLBASE="http://192.168.0.112:45455/api/";
     private static RetrofitService myApiInteface;
 
 

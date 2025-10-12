@@ -48,7 +48,7 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.View
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
         Glide.with(context)
-                .load("http://192.168.0.172:45455" + inmueble.getImagen())
+                .load("http://192.168.0.112:45455" + inmueble.getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivImagenInmueble);
     }

@@ -84,7 +84,7 @@ public class CrearInmuebleFragment extends Fragment {
                 inmueble.setImgGuardar(mViewModel.convertirImagen(imagenView));
 
                 if(mViewModel.crearInmueble(inmueble)){
-                    Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main).navigate(R.id.nav_inmueble); // no funciona
+                    Navigation.findNavController((getActivity()), R.id.inmuebleFragment).navigate(R.id.nav_inmueble); // no funciona
                 }
 
 
