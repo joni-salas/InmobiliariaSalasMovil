@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class LoginViewModel extends AndroidViewModel {
 
     private Context context;
-    private MutableLiveData<String> mensaje;
+    private MutableLiveData<String> mensajeMD;
     private MutableLiveData<String> tokenMD;
     private ApiClient.RetrofitService rfs;
     private static String token;
@@ -36,10 +36,10 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public LiveData<String> getMensaje(){
-        if(mensaje ==null){
-            mensaje = new MutableLiveData<>();
+        if(mensajeMD ==null){
+            mensajeMD = new MutableLiveData<>();
         }
-        return mensaje;
+        return mensajeMD;
     }
     public LiveData<String> getTokenMD(){
         if(tokenMD ==null){
@@ -47,7 +47,6 @@ public class LoginViewModel extends AndroidViewModel {
         }
         return tokenMD;
     }
-
 
     public void iniciarSesion(String usuario, String clave){
 
@@ -59,14 +58,13 @@ public class LoginViewModel extends AndroidViewModel {
                 if(response.isSuccessful()){
                     token = response.body();
                     Log.d("token", response.body());
+
                     // Guardo el token en SharedPreferences
                     SharedPreferences sp = context.getSharedPreferences("datos.dat",0);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("token", "Bearer " + token);
                     editor.commit();
-
-                    //Seteo Al mutable el valor del Token
-                    //tokenMD.postValue(response.body());
+                    mensajeMD.setValue("Bienvenido " + usuario);
 
                     //Abro el intent Con vista principal
                     Intent i =new Intent(context,MainActivity.class);
@@ -75,13 +73,13 @@ public class LoginViewModel extends AndroidViewModel {
 
                 }else{
                     Log.d("Error", response.message());
-                    Toast.makeText(context,"Contraseña o usuario incorrecto", Toast.LENGTH_LONG).show();
+                    mensajeMD.setValue("Contraseña o Usuario incorrecto");
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.d("Error on Flailure= ", t.getLocalizedMessage());
+                Log.d("Error on Failure= ", t.getLocalizedMessage());
             }
         });
 

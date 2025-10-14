@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inmobiliariajonathan.R;
-import com.example.inmobiliariajonathan.databinding.FragmentInmueblesBinding;
 import com.example.inmobiliariajonathan.modelo.Inmueble;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import java.util.List;
 
 
 public class InmueblesFragment extends Fragment {
+    //import com.example.inmobiliariajonathan.databinding.FragmentInmueblesBinding;
     private RecyclerView rvInmuebles;
     private InmueblesViewModel inmueblesViewModel;
     private InmuebleAdapter adapter;

@@ -1,59 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3335" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/bt_white.xml" value="0.3325" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/fondo_degradado.xml" value="0.3325" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1925" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/ic_menu_camera.xml" value="0.3675" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.3675" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.3675" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/icono.xml" value="0.3335" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/drawable/side_nav_bar.xml" value="0.1925" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/app_bar_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/detalle_contrato_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_contratos.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_crar_inmueble.xml" value="0.22395833333333334" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_crear_inmueble.xml" value="0.33" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_gallery.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_inicio.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_inmueble2.xml" value="0.35260416666666666" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_inmuebles.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_logout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/fragment_perfil.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/inquilino2_fragment.xml" value="0.33" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/inquilinos_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/item_detalle_pago.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/item_inmueble_alquilado.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/item_inmueble_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/item_inquilino_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/nav_header_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/layout/pagos_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3675" />
-        <entry key="..\:/Users/joni_/AndroidStudioProjects/InmobiliariaJonathan/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3475" />
-      </map>
-    </option>
-  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.2536231884057971" />
-      </ProjectState>
-    </option>
   </component>
 </project>

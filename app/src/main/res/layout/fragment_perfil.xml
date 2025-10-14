@@ -8,20 +8,6 @@
     tools:context=".ui.perfil.PerfilFragment">
 
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/etContraseñaPerfil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailPerfil"
-        app:layout_constraintVertical_bias="1.0" />
-
     <EditText
         android:id="@+id/etDniPerfil"
         android:layout_width="338dp"
@@ -98,7 +84,7 @@
         android:id="@+id/etTelefonoPerfil"
         android:layout_width="338dp"
         android:layout_height="54dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="300dp"
         android:background="@drawable/bt_withe"
         android:ems="10"
         android:enabled="false"
@@ -107,28 +93,10 @@
         android:textAlignment="center"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContraseñaPerfil" />
-
-    <EditText
-        android:id="@+id/etContraseñaPerfil"
-        android:layout_width="337dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/bt_withe"
-        android:ems="10"
-        android:enabled="false"
-        android:hint="Contraseña"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColor="@color/primary_text"
-        android:textColorHint="@color/secondary_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailPerfil" />
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btEditarPerfil"
@@ -204,13 +172,12 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="Telefono"
-        android:textSize="20sp"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/etTelefonoPerfil"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContraseñaPerfil"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

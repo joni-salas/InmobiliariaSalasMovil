@@ -67,7 +67,7 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
                 if(response.isSuccessful()){
                     Toast.makeText(context,"Inmueble creado correctamente",Toast.LENGTH_LONG).show();
                     resultado =true;
-                    Navigation.findNavController((Activity) context, R.id.inmuebleFragment).navigate(R.id.nav_inmueble);
+                    //Navigation.findNavController((Activity) context, R.id.inmuebleFragment).navigate(R.id.nav_inmueble);
                 }else{
                     Log.d("Error OnResponse: ", response.message());
                     Toast.makeText(context,"Error al crear inmueble",Toast.LENGTH_LONG).show();

@@ -79,7 +79,7 @@ public class CrearInmuebleFragment extends Fragment {
                 inmueble.setAmbientes(etAmbientes.getText().toString());
                 inmueble.setPrecio(etPrecio.getText().toString());
                 inmueble.setTipo(etTipo.getText().toString());
-                inmueble.setEstado("1");
+                inmueble.setEstado("0");
                 inmueble.setImagen("");
                 inmueble.setImgGuardar(mViewModel.convertirImagen(imagenView));
 

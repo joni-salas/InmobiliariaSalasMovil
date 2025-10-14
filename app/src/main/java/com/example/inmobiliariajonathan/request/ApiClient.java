@@ -71,8 +71,11 @@ public class ApiClient {
         @GET("Propietarios")
         public Call<Propietario> getUsuarioActual(@Header("Authorization") String token);
 
-        @PUT("Propietarios/actualizar")
+        @PUT("Propietarios/actualizarPerfil")
         public Call<Propietario> editarPerfil(@Body Propietario propietario,@Header("Authorization") String token);
+
+        @PUT("Propietarios/actualizarClave")
+        public Call<Void> cambiarClave(@Body CambioClave cambioClave, @Header("Authorization") String token);
 
         //INMUEBLE
         @GET("Inmuebles/obtener")

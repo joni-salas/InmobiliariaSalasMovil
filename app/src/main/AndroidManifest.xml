@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.inmobiliariajonathan">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-feature  android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -29,8 +29,12 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.InmobiliariaJonathan.NoActionBar">
-
         </activity>
+
+        <activity android:name=".ui.CambiarContraseña.CambiarContrasenaActivity"
+            android:exported="true" >
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA_HOKMvZh28N9Rk1HIwEVOybg0G5nhaKQ" />

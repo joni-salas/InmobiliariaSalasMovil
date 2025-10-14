@@ -15,6 +15,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.inmobiliariajonathan.modelo.Propietario;
 import com.example.inmobiliariajonathan.request.ApiClient;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +75,6 @@ public class PerfilViewModel extends AndroidViewModel {
         }else{
             textoBoton.setValue("Editar");
             estadoMT.setValue(false);
-
             //aca llamo al actualizarUSuario
             actualizarUsuario(propietario);
         }
@@ -105,32 +107,41 @@ public class PerfilViewModel extends AndroidViewModel {
 
     public void actualizarUsuario(Propietario propietario){
         api = new ApiClient();
-        rfs=ApiClient.getMyApiClient();
-        Call<Propietario> usuarioActual=rfs.editarPerfil(propietario,api.getToken(context));
-        //Log.d("token: ", api.getToken(context));
-       // Log.d("prop",propietario.getId()+ " " + propietario.getDni() + " "+ propietario.getEstado() +" "+ propietario.getApellido() +" "+ propietario.getNombre());
+        rfs = ApiClient.getMyApiClient();
+
+        Log.d("PUT_JSON", new Gson().toJson(propietario));
+        Call<Propietario> usuarioActual = rfs.editarPerfil(propietario, api.getToken(context));
+
         usuarioActual.enqueue(new Callback<Propietario>() {
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()){
+                    usuarioMT.setValue(response.body());
+                    Toast.makeText(context, "Perfil actualizado correctamente", Toast.LENGTH_LONG).show();
+                } else {
+                    Log.d("Retrofit Msg:", response.message());
 
-                    usuarioMT.setValue(response.body());  //seteo el el Propietario en el mutable usuario
-                    Toast.makeText(context,"Perfil actualizado correctamente",Toast.LENGTH_LONG).show();
-                }else{
-                    Log.d("Error: ", response.message());
-                    Toast.makeText(context,"Error al actualizar Perfil",Toast.LENGTH_LONG).show();
+                    if (response.errorBody() != null) {
+                        try {
+                            String errorBodyDetail = response.errorBody().string();
+
+                            Log.e("Error Detalle:", errorBodyDetail);
+                            Toast.makeText(context, "Error Servidor: " + errorBodyDetail, Toast.LENGTH_LONG).show();
+
+                        } catch (IOException e) {
+                            Log.e("Error Lectura Body:", "Fallo al leer el detalle del error: " + e.getLocalizedMessage());
+                            Toast.makeText(context, "Error al actualizar Perfil (Sin detalle)", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(context, "Error al actualizar Perfil", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Propietario> call, Throwable t) {
-                Log.d("Error onFailure",t.getLocalizedMessage());
+                Log.d("Error onFailure", t.getLocalizedMessage());
             }
         });
-
     }
-
-
-
-
 }

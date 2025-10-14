@@ -82,7 +82,6 @@ public class PerfilFragment extends Fragment {
         etApellido =root.findViewById(R.id.etApellidoPerfil);
         etTelefono =root.findViewById(R.id.etTelefonoPerfil);
         etMail =root.findViewById(R.id.etEmailPerfil);
-        etContraseña =root.findViewById(R.id.etContraseñaPerfil);
         btEditar =root.findViewById(R.id.btEditarPerfil);
 
         btEditar.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +93,7 @@ public class PerfilFragment extends Fragment {
                 propietario.setDni((etDni.getText().toString()));
                 propietario.setTelefono(etTelefono.getText().toString());
                 propietario.setEmail(etMail.getText().toString());
-                propietario.setContraseña(etContraseña.getText().toString());
+                //propietario.setContraseña(etContraseña.getText().toString());
 
                 String texto=btEditar.getText().toString();
                 perfilViewModel.accionBoton(texto,propietario);
