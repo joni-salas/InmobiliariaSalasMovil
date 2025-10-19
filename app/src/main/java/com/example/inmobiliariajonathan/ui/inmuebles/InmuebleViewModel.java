@@ -50,10 +50,10 @@ public class InmuebleViewModel extends AndroidViewModel {
     public void accionBoton(String txtBoton,Bundle bundle){
 
         if(txtBoton.equals("Dar de baja")){
-            textoBoton.setValue("Dar de alta");
+            textoBoton.postValue("Dar de alta");
             this.darDeBajaInmeuble(bundle);
         }else{
-            textoBoton.setValue("Dar de baja");
+            textoBoton.postValue("Dar de baja");
 
             this.darDeBajaInmeuble(bundle);
         }
@@ -61,7 +61,7 @@ public class InmuebleViewModel extends AndroidViewModel {
 
     public void cargarInmueble(Bundle bundle){
         Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble") ;  //este tag es el que viene de inmueble adapter
-        this.inmueble.setValue(inmueble);
+        this.inmueble.postValue(inmueble);
     }
 
     public void darDeBajaInmeuble(Bundle bundle){
@@ -76,10 +76,10 @@ public class InmuebleViewModel extends AndroidViewModel {
                 if(response.isSuccessful()){
                     if(response.body().isEstado().equals("1")){
                         Toast.makeText(context,"Inmueble dado de Alta",Toast.LENGTH_LONG).show();
-                        inmueble.setValue(response.body()); // seteo el inmueble actualizado al mutable
+                        inmueble.postValue(response.body()); // seteo el inmueble actualizado al mutable
                     }else{
                         Toast.makeText(context,"Inmueble dado de Baja",Toast.LENGTH_LONG).show();
-                        inmueble.setValue(response.body()); // seteo el inmueble actualizado al mutable
+                        inmueble.postValue(response.body()); // seteo el inmueble actualizado al mutable
                     }
 
                 }else{

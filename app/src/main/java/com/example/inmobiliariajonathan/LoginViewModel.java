@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -14,7 +13,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.inmobiliariajonathan.modelo.Propietario;
 import com.example.inmobiliariajonathan.request.ApiClient;
-import com.google.android.gms.common.api.Api;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,68 +20,63 @@ import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 
-    private Context context;
-    private MutableLiveData<String> mensajeMD;
-    private MutableLiveData<String> tokenMD;
-    private ApiClient.RetrofitService rfs;
-    private static String token;
+    private final Context context;
+    private final ApiClient.RetrofitService rfs;
 
+    private final MutableLiveData<String> mensajeMD = new MutableLiveData<>();
+    private final MutableLiveData<String> tokenMD = new MutableLiveData<>();
+    private static String token;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        this.context = application.getApplicationContext();
-        rfs=ApiClient.getMyApiClient();
+        context = application.getApplicationContext();
+        rfs = ApiClient.getMyApiClient();
     }
 
-    public LiveData<String> getMensaje(){
-        if(mensajeMD ==null){
-            mensajeMD = new MutableLiveData<>();
-        }
+    public LiveData<String> getMensaje() {
         return mensajeMD;
     }
-    public LiveData<String> getTokenMD(){
-        if(tokenMD ==null){
-            tokenMD = new MutableLiveData<>();
-        }
+
+    public LiveData<String> getTokenMD() {
         return tokenMD;
     }
 
-    public void iniciarSesion(String usuario, String clave){
-
-        Call<String> login=rfs.login(usuario, clave);
+    /**
+     * Inicia sesión y guarda el token en SharedPreferences
+     */
+    public void iniciarSesion(String usuario, String clave) {
+        Call<String> login = rfs.login(usuario, clave);
 
         login.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful() && response.body() != null) {
                     token = response.body();
-                    Log.d("token", response.body());
+                    Log.d("token", token);
 
                     // Guardo el token en SharedPreferences
-                    SharedPreferences sp = context.getSharedPreferences("datos.dat",0);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("token", "Bearer " + token);
-                    editor.commit();
-                    mensajeMD.setValue("Bienvenido " + usuario);
+                    SharedPreferences sp = context.getSharedPreferences("datos.dat", Context.MODE_PRIVATE);
+                    sp.edit().putString("token", "Bearer " + token).apply();
 
-                    //Abro el intent Con vista principal
-                    Intent i =new Intent(context,MainActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);        //asi se llama activity cuando no esta en una activitty
-                    context.startActivity(i);
+                    mensajeMD.postValue("Bienvenido " + usuario);
+                    tokenMD.postValue(token);
 
-                }else{
+                    // Abrir MainActivity desde ViewModel (no ideal, pero posible)
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                } else {
                     Log.d("Error", response.message());
-                    mensajeMD.setValue("Contraseña o Usuario incorrecto");
+                    mensajeMD.postValue("Contraseña o Usuario incorrecto");
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.d("Error on Failure= ", t.getLocalizedMessage());
+                mensajeMD.postValue("Error de conexión: " + t.getLocalizedMessage());
             }
         });
-
     }
-
-
 }

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -24,8 +25,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inmobiliariajonathan.R;
+import com.example.inmobiliariajonathan.databinding.FragmentCrearInmuebleBinding;
 import com.example.inmobiliariajonathan.modelo.Inmueble;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,11 +37,7 @@ import java.util.List;
 public class CrearInmuebleFragment extends Fragment {
 
     private CrearInmuebleViewModel mViewModel;
-    private Context context;
-    private EditText etDireccion ,etSuperficie,etAmbientes,etPrecio,etTipo;
-    private Button btCrear;
-    private Button btCargarImagen;
-    private ImageView imagenView;
+    private FragmentCrearInmuebleBinding binding;
 
     public static CrearInmuebleFragment newInstance() {
         return new CrearInmuebleFragment();
@@ -49,54 +48,46 @@ public class CrearInmuebleFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
 
-        View root =  inflater.inflate(R.layout.fragment_crear_inmueble, container, false);
+        binding = FragmentCrearInmuebleBinding.inflate(inflater, container, false);
 
-        context= root.getContext();
-        inicializar(root);
+        mViewModel = new ViewModelProvider(this).get(CrearInmuebleViewModel.class);
 
-        return root;
+        inicializar();
+
+        return binding.getRoot();
+
     }
 
-    private void inicializar(View view) {
-        etDireccion = view.findViewById(R.id.etDireccion);
-        etSuperficie = view.findViewById(R.id.etSuperficie);
-        etAmbientes = view.findViewById(R.id.etAmbientes);
-        etPrecio = view.findViewById(R.id.etPrecio);
-        etTipo = view.findViewById(R.id.etPrecio);
-        btCrear = view.findViewById(R.id.btCrear);
-        imagenView = view.findViewById(R.id.imagenView);
-        btCargarImagen = view.findViewById(R.id.btCargarImagen);
-
-        mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(CrearInmuebleViewModel.class);
-
-        btCrear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Inmueble inmueble= new Inmueble();
-
-                inmueble.setDireccion(etDireccion.getText().toString());
-                inmueble.setSuperficie(etSuperficie.getText().toString());
-                inmueble.setAmbientes(etAmbientes.getText().toString());
-                inmueble.setPrecio(etPrecio.getText().toString());
-                inmueble.setTipo(etTipo.getText().toString());
-                inmueble.setEstado("0");
-                inmueble.setImagen("");
-                inmueble.setImgGuardar(mViewModel.convertirImagen(imagenView));
-
-                if(mViewModel.crearInmueble(inmueble)){
-                    Navigation.findNavController((getActivity()), R.id.inmuebleFragment).navigate(R.id.nav_inmueble); // no funciona
-                }
+    private void inicializar() {
 
 
+        mViewModel.getMensajeMutable().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje != null) {
+                Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
             }
         });
 
-        btCargarImagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cargarImagen();
+        mViewModel.getInmuebleCreadoMutable().observe(getViewLifecycleOwner(), creado -> {
+            if (Boolean.TRUE.equals(creado)) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.nav_inmueble);
             }
         });
+
+        binding.btCrear.setOnClickListener(v -> {
+            Inmueble inmueble = new Inmueble();
+            inmueble.setDireccion(binding.etDireccion.getText().toString());
+            inmueble.setSuperficie(binding.etSuperficie.getText().toString());
+            inmueble.setAmbientes(binding.etAmbientes.getText().toString());
+            inmueble.setPrecio(binding.etPrecio.getText().toString());
+            inmueble.setTipo(binding.etTipo.getText().toString());
+            inmueble.setEstado("0");
+            inmueble.setImagen("");
+            inmueble.setImgGuardar(mViewModel.convertirImagen(binding.imagenView));
+
+            mViewModel.crearInmueble(inmueble);
+        });
+
+        binding.btCargarImagen.setOnClickListener(v -> cargarImagen());
     }
 
     public void cargarImagen(){
@@ -113,13 +104,13 @@ public class CrearInmuebleFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("registro", "onActivityResult");
         Uri path=data.getData();  //seteo al Objeto Uri la imagen seleccionada de la galeria
-        imagenView.setImageURI(path);  //seteo en el imagenView la imagen seleccionada
+        binding.imagenView.setImageURI(path);  //seteo en el imagenView la imagen seleccionada
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //binding = null;
+        binding = null;
     }
 
 

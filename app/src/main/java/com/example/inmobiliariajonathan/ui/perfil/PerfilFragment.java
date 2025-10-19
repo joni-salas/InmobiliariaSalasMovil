@@ -1,75 +1,56 @@
 package com.example.inmobiliariajonathan.ui.perfil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.inmobiliariajonathan.R;
 import com.example.inmobiliariajonathan.databinding.FragmentPerfilBinding;
 import com.example.inmobiliariajonathan.modelo.Propietario;
+import com.example.inmobiliariajonathan.ui.CambiarContraseña.CambiarContrasenaActivity;
 
 public class PerfilFragment extends Fragment {
 
-    private EditText etDni, etNombre, etApellido, etTelefono, etContraseña, etMail;
-    private Button btEditar;
     PerfilViewModel perfilViewModel;
     private Propietario propietarioCompleto;
 
-    //private FragmentPerfilBinding binding;
+    private FragmentPerfilBinding binding;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        perfilViewModel =
-                new ViewModelProvider(this).get(PerfilViewModel.class);
 
-        //binding = FragmentPerfilBinding.inflate(inflater, container, false);
+        perfilViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
+        binding = FragmentPerfilBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        View root = inflater.inflate(R.layout.fragment_perfil, container, false);
         inicializarVista(root);
 
-        perfilViewModel.getUsuarioMutable().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
-            @Override
-            public void onChanged(Propietario propietario) {
-                propietarioCompleto = propietario;
-                etDni.setText(propietario.getDni());
-                etApellido.setText(propietario.getApellido());
-                etNombre.setText(propietario.getNombre());
-                etTelefono.setText(propietario.getTelefono());
-                etMail.setText(propietario.getEmail());
-                //etContraseña.setText(propietario.getContraseña());
-            }
-        });
-        perfilViewModel.getEstadoMutable().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                etDni.setEnabled(aBoolean);
-                etApellido.setEnabled(aBoolean);
-                etNombre.setEnabled(aBoolean);
-                etTelefono.setEnabled(aBoolean);
-                etMail.setEnabled(aBoolean);
-                etContraseña.setEnabled(aBoolean);
-            }
+        perfilViewModel.getUsuarioMutable().observe(getViewLifecycleOwner(), propietario -> {
+            propietarioCompleto = propietario;
+            binding.etDniPerfil.setText(propietario.getDni());
+            binding.etApellidoPerfil.setText(propietario.getApellido());
+            binding.etNombrePerfil.setText(propietario.getNombre());
+            binding.etTelefonoPerfil.setText(propietario.getTelefono());
+            binding.etEmailPerfil.setText(propietario.getEmail());
         });
 
-        perfilViewModel.getTextoBoton().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                btEditar.setText(s);
-            }
+        perfilViewModel.getEstadoMutable().observe(getViewLifecycleOwner(), aBoolean -> {
+            binding.etDniPerfil.setEnabled(aBoolean);
+            binding.etApellidoPerfil.setEnabled(aBoolean);
+            binding.etNombrePerfil.setEnabled(aBoolean);
+            binding.etTelefonoPerfil.setEnabled(aBoolean);
+            binding.etEmailPerfil.setEnabled(aBoolean);
         });
 
-        //final TextView textView = binding.textPerfil;
-        //perfilViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
+        perfilViewModel.getTextoBoton().observe(getViewLifecycleOwner(), s -> {
+            binding.btEditarPerfil.setText(s);
+        });
 
         perfilViewModel.traerDatos();
 
@@ -77,29 +58,23 @@ public class PerfilFragment extends Fragment {
     }
 
     private void inicializarVista(View root) {
-        etDni = root.findViewById(R.id.etDniPerfil);
-        etNombre =root.findViewById(R.id.etNombrePerfil);
-        etApellido =root.findViewById(R.id.etApellidoPerfil);
-        etTelefono =root.findViewById(R.id.etTelefonoPerfil);
-        etMail =root.findViewById(R.id.etEmailPerfil);
-        btEditar =root.findViewById(R.id.btEditarPerfil);
 
-        btEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Propietario propietario = propietarioCompleto;
-                propietario.setNombre(etNombre.getText().toString());
-                propietario.setApellido(etApellido.getText().toString());
-                propietario.setDni((etDni.getText().toString()));
-                propietario.setTelefono(etTelefono.getText().toString());
-                propietario.setEmail(etMail.getText().toString());
-                //propietario.setContraseña(etContraseña.getText().toString());
+        binding.btEditarPerfil.setOnClickListener(view -> {
+            Propietario propietario = propietarioCompleto;
+            propietario.setNombre(binding.etNombrePerfil.getText().toString());
+            propietario.setApellido(binding.etApellidoPerfil.getText().toString());
+            propietario.setDni(binding.etDniPerfil.getText().toString());
+            propietario.setTelefono(binding.etTelefonoPerfil.getText().toString());
+            propietario.setEmail(binding.etEmailPerfil.getText().toString());
 
-                String texto=btEditar.getText().toString();
-                perfilViewModel.accionBoton(texto,propietario);
-            }
+            String texto = binding.btEditarPerfil.getText().toString();
+            perfilViewModel.accionBoton(texto, propietario);
         });
 
+        binding.btOlvidecontrasena.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), CambiarContrasenaActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

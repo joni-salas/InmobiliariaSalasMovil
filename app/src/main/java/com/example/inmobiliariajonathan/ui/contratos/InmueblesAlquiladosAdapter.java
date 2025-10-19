@@ -4,11 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -17,39 +13,45 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobiliariajonathan.R;
+import com.example.inmobiliariajonathan.databinding.ItemInmuebleAlquiladoBinding;
 import com.example.inmobiliariajonathan.modelo.Inmueble;
 
 import java.util.List;
 
-public class InmueblesAlquiladosAdapter extends RecyclerView.Adapter<InmueblesAlquiladosAdapter.ViewHolder>{
+public class InmueblesAlquiladosAdapter extends RecyclerView.Adapter<InmueblesAlquiladosAdapter.ViewHolder> {
 
     private Context context;
     private List<Inmueble> inmuebles;
-    private LayoutInflater inflater;
 
-
-
-    public InmueblesAlquiladosAdapter(Context context, List<Inmueble> inmuebles, LayoutInflater inflater) {
+    public InmueblesAlquiladosAdapter(Context context, List<Inmueble> inmuebles) {
         this.context = context;
         this.inmuebles = inmuebles;
-        this.inflater = inflater;
     }
+
     @NonNull
     @Override
-    public InmueblesAlquiladosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_inmueble_alquilado, parent, false);
-        return new InmueblesAlquiladosAdapter.ViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemInmuebleAlquiladoBinding binding = ItemInmuebleAlquiladoBinding
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InmueblesAlquiladosAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Inmueble inmueble = inmuebles.get(position);
-        holder.tvDireccion.setText(inmueble.getDireccion());
+        holder.binding.tvDireccion.setText(inmueble.getDireccion());
 
         Glide.with(context)
                 .load("http://192.168.0.112:45455" + inmueble.getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivImagenInmueble);
+                .into(holder.binding.ivImagenInmueble);
+
+        holder.binding.getRoot().setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("inmueble", inmueble);
+            Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.detalleContratoFragment, bundle);
+        });
     }
 
     @Override
@@ -57,24 +59,12 @@ public class InmueblesAlquiladosAdapter extends RecyclerView.Adapter<InmueblesAl
         return inmuebles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDireccion;
-        ImageView ivImagenInmueble;
-        Button btnVer;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ivImagenInmueble    = itemView.findViewById(R.id.ivImagenInmueble);
-            //btnVer              = itemView.findViewById(R.id.btnVer);
-            tvDireccion         = itemView.findViewById(R.id.tvDireccion);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    Inmueble inmueble = inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
-                    Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main).navigate(R.id.detalleContratoFragment, bundle);
-                }
-            });
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ItemInmuebleAlquiladoBinding binding;
+
+        public ViewHolder(@NonNull ItemInmuebleAlquiladoBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }

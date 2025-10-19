@@ -1,73 +1,61 @@
 package com.example.inmobiliariajonathan.ui.inquilinos;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.inmobiliariajonathan.R;
-import com.example.inmobiliariajonathan.modelo.Inmueble;
+import com.example.inmobiliariajonathan.databinding.Inquilino2FragmentBinding;
 import com.example.inmobiliariajonathan.modelo.Inquilino;
-import com.example.inmobiliariajonathan.ui.inmuebles.InmuebleViewModel;
 
 public class InquilinoFragment extends Fragment {
 
     private InquilinoViewModel inquilinoViewModel;
-    private TextView TVInqCodigo;
-    private TextView TVInqNombre;
-    private TextView TVInqApellido;
-    private TextView TVInqDni;
-    private TextView TVInqEmail;
-    private TextView TVInqTelefono;
-
+    private Inquilino2FragmentBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.inquilino2_fragment, container, false);
-        inicializar(root);
-        return root;
+
+        binding = Inquilino2FragmentBinding.inflate(inflater, container, false);
+
+        inicializar();
+
+        return binding.getRoot();
     }
 
-    private void inicializar(View view) {
-        TVInqCodigo = view.findViewById(R.id.TVInqCodigo);
-        TVInqNombre = view.findViewById(R.id.TVInqNombre);
-        TVInqApellido = view.findViewById(R.id.TVInqApellido);
-        TVInqDni = view.findViewById(R.id.TVInqDni);
-        TVInqEmail = view.findViewById(R.id.TVInqEmail);
-        TVInqTelefono = view.findViewById(R.id.TVInqTelefono);
+    private void inicializar() {
+        inquilinoViewModel = new ViewModelProvider(this).get(InquilinoViewModel.class);
 
-        inquilinoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InquilinoViewModel.class);
-        inquilinoViewModel.getInquilino().observe(getActivity(), new Observer<Inquilino>() {
-            @Override
-            public void onChanged(Inquilino inquilino) {
-
-                if(inquilino !=null){
-                    TVInqCodigo.setText(inquilino.getIdInquilino() + "");
-                    TVInqNombre.setText(inquilino.getNombre());
-                    TVInqApellido.setText(inquilino.getApellido());
-                    TVInqDni.setText(inquilino.getDNI()+"");
-                    TVInqEmail.setText(inquilino.getEmail());
-                    TVInqTelefono.setText(inquilino.getTelefono());
-                }
-
-
+        inquilinoViewModel.getInquilino().observe(getViewLifecycleOwner(), inquilino -> {
+            if (inquilino != null) {
+                binding.TVInqCodigo.setText(String.valueOf(inquilino.getIdInquilino()));
+                binding.TVInqNombre.setText(inquilino.getNombre());
+                binding.TVInqApellido.setText(inquilino.getApellido());
+                binding.TVInqDni.setText(String.valueOf(inquilino.getDNI()));
+                binding.TVInqEmail.setText(inquilino.getEmail());
+                binding.TVInqTelefono.setText(inquilino.getTelefono());
             }
         });
-        inquilinoViewModel.cargarInquilino(getArguments()); // getArguments es para obtener el objeto bundle
+
+        inquilinoViewModel.getMensajeMutable().observe(getViewLifecycleOwner(), mensaje -> {
+            if(mensaje != null){
+                Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        inquilinoViewModel.cargarInquilino(getArguments());
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

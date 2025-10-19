@@ -70,11 +70,11 @@ public class PerfilViewModel extends AndroidViewModel {
     public void accionBoton(String txtBoton,Propietario propietario){
 
         if(txtBoton.equals("Editar")){
-            textoBoton.setValue("Guardar");
-            estadoMT.setValue(true);
+            textoBoton.postValue("Guardar");
+            estadoMT.postValue(true);
         }else{
-            textoBoton.setValue("Editar");
-            estadoMT.setValue(false);
+            textoBoton.postValue("Editar");
+            estadoMT.postValue(false);
             //aca llamo al actualizarUSuario
             actualizarUsuario(propietario);
         }
@@ -90,7 +90,7 @@ public class PerfilViewModel extends AndroidViewModel {
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
                 if(response.isSuccessful()){
                     Log.d("Propietario: ", response.body().getNombre());
-                    usuarioMT.setValue(response.body());  //seteo el el Propietario en el mutable usuario
+                    usuarioMT.postValue(response.body());  //seteo el el Propietario en el mutable usuario
 
                 }else{
                     Log.d("Propietario: ", response.message());
@@ -116,7 +116,7 @@ public class PerfilViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
                 if (response.isSuccessful()){
-                    usuarioMT.setValue(response.body());
+                    usuarioMT.postValue(response.body());
                     Toast.makeText(context, "Perfil actualizado correctamente", Toast.LENGTH_LONG).show();
                 } else {
                     Log.d("Retrofit Msg:", response.message());

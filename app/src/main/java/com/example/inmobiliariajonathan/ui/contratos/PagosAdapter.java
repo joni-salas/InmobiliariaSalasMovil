@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inmobiliariajonathan.R;
+import com.example.inmobiliariajonathan.databinding.ItemDetallePagoBinding;
 import com.example.inmobiliariajonathan.modelo.Contrato;
 import com.example.inmobiliariajonathan.modelo.Pago;
 
@@ -22,33 +21,24 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ViewHolder> 
 
     private Context context;
     private List<Pago> pagos;
-    private LayoutInflater inflater;
-    Contrato contratoPago;
 
-    public PagosAdapter(Context context, List<Pago> pagos, LayoutInflater inflater) {
+    public PagosAdapter(Context context, List<Pago> pagos) {
         this.context = context;
         this.pagos = pagos;
-        this.inflater = inflater;
     }
 
     @NonNull
     @Override
     public PagosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_detalle_pago, parent, false);
-        return new PagosAdapter.ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemDetallePagoBinding binding = ItemDetallePagoBinding.inflate(inflater, parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PagosAdapter.ViewHolder holder, int position) {
-
-            holder.tvCodigoPago.setText(pagos.get(position).getIdPago() + "");
-            holder.tvNumeroPago.setText(pagos.get(position).getNumero()+"");
-            holder.tvCodigoContratoPagos.setText(pagos.get(position).getContrato().getIdContrato()+"");
-            holder.tvFechaPago.setText(pagos.get(position).getFechaDePago());
-            holder.tvImporte.setText("$" + pagos.get(position).getImporte());
-            contratoPago = pagos.get(position).getContrato();
-
-
+        Pago pago = pagos.get(position);
+        holder.bind(pago);
     }
 
     @Override
@@ -58,23 +48,31 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvCodigoPago , tvNumeroPago, tvCodigoContratoPagos, tvImporte, tvFechaPago;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvCodigoContratoPagos = itemView.findViewById(R.id.tvCodigoContratoPagos);
-            tvCodigoPago = itemView.findViewById(R.id.tvCodigoPago);
-            tvNumeroPago = itemView.findViewById(R.id.tvNumeroPago);
-            tvImporte = itemView.findViewById(R.id.tvImporte);
-            tvFechaPago = itemView.findViewById(R.id.tvFechaPago);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        private final ItemDetallePagoBinding binding;
+        private Contrato contratoPago;
+
+        public ViewHolder(@NonNull ItemDetallePagoBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
+            binding.getRoot().setOnClickListener(view -> {
+                if (contratoPago != null) {
                     Bundle bundle = new Bundle();
-                    Contrato cont = contratoPago;
-                    bundle.putSerializable("contrato", cont);
-                    Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main).navigate(R.id.pagosFragment, bundle);
+                    bundle.putSerializable("contrato", contratoPago);
+                    Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main)
+                            .navigate(R.id.pagosFragment, bundle);
                 }
             });
+        }
+
+        public void bind(Pago pago) {
+            binding.tvCodigoPago.setText(String.valueOf(pago.getIdPago()));
+            binding.tvNumeroPago.setText(String.valueOf(pago.getNumero()));
+            binding.tvCodigoContratoPagos.setText(String.valueOf(pago.getContrato().getIdContrato()));
+            binding.tvFechaPago.setText(pago.getFechaDePago());
+            binding.tvImporte.setText("$" + pago.getImporte());
+
+            contratoPago = pago.getContrato();
         }
     }
 }

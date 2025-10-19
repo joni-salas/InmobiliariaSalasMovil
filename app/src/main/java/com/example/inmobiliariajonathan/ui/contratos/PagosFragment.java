@@ -1,33 +1,27 @@
 package com.example.inmobiliariajonathan.ui.contratos;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.inmobiliariajonathan.R;
+import com.example.inmobiliariajonathan.databinding.PagosFragmentBinding;
 import com.example.inmobiliariajonathan.modelo.Pago;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PagosFragment extends Fragment {
 
-    private RecyclerView rvPagosContrato;
-    private PagosAdapter adapter;
     private PagosViewModel pagosViewModel;
-    private Context context;
+    private PagosAdapter adapter;
+    private PagosFragmentBinding binding;
 
     public static PagosFragment newInstance() {
         return new PagosFragment();
@@ -37,25 +31,31 @@ public class PagosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.pagos_fragment, container, false);
-        context = root.getContext();
-        inicializar(root);
-        return root;
+        binding = PagosFragmentBinding.inflate(inflater, container, false);
+
+        inicializar();
+        return binding.getRoot();
     }
 
-    private void inicializar(View root) {
-        rvPagosContrato = root.findViewById(R.id.rvPagosContrato);
-        pagosViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagosViewModel.class);
-        pagosViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<List<Pago>>() {
-            @Override
-            public void onChanged(List<Pago> pagos) {
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false);
-                rvPagosContrato.setLayoutManager(gridLayoutManager);
-                adapter = new PagosAdapter(context,pagos,getLayoutInflater());
-                rvPagosContrato.setAdapter(adapter);
+    private void inicializar() {
+        pagosViewModel = new ViewModelProvider(this).get(PagosViewModel.class);
+
+        pagosViewModel.getPagos().observe(getViewLifecycleOwner(), pagos -> {
+            if (pagos != null) {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 1);
+                binding.rvPagosContrato.setLayoutManager(gridLayoutManager);
+
+                adapter = new PagosAdapter(requireContext(), pagos);
+                binding.rvPagosContrato.setAdapter(adapter);
             }
         });
+
         pagosViewModel.cargarPagosDeContratos(getArguments());
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

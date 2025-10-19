@@ -39,12 +39,12 @@ public class CambiarContrasenaViewModel extends AndroidViewModel {
 
     public void cambiarcontra(String email, String contraNueva, String repContraNueva) {
         if (email.isEmpty() || contraNueva.isEmpty() || repContraNueva.isEmpty()) {
-            mensaje.setValue("Todos los campos son obligatorios");
+            mensaje.postValue("Todos los campos son obligatorios");
             return;
         }
 
         if (!contraNueva.equals(repContraNueva)) {
-            mensaje.setValue("Las contraseñas no coinciden");
+            mensaje.postValue("Las contraseñas no coinciden");
             return;
         }
 
@@ -55,17 +55,18 @@ public class CambiarContrasenaViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful() || response.code() == 204) {
-                    mensaje.setValue("Contraseña actualizada correctamente");
-                    cambioExitoso.setValue(true);
+                    mensaje.postValue("Contraseña actualizada correctamente");
+                    cambioExitoso.postValue(true);
                 } else {
-                    mensaje.setValue("Error al cambiar la contraseña. Código: " + response.code());
-                    cambioExitoso.setValue(false);
+                    mensaje.postValue("Error al cambiar la contraseña. Código: " + response.code());
+                    cambioExitoso.postValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                mensaje.setValue("Error de conexión: " + t.getMessage());
+                //mensaje.setValue("Error de conexión: " + t.getMessage());
+                mensaje.postValue("Error de conexión: " + t.getMessage());
                 cambioExitoso.setValue(false);
             }
         });

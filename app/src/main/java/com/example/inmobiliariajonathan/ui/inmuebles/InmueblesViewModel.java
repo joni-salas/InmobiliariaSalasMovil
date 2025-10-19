@@ -52,7 +52,7 @@ public class InmueblesViewModel extends AndroidViewModel {
                 if(response.isSuccessful()){
 
                     response.body().forEach(e -> { Log.d("listaInmuebles: ", e.getImagen()); } );
-                    inmuebles.setValue(response.body());
+                    inmuebles.postValue(response.body());
 
                 }else{
                     Log.d("Error onResponse", response.message());

@@ -1,70 +1,62 @@
 package com.example.inmobiliariajonathan.ui.inmuebles;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.inmobiliariajonathan.R;
-import com.example.inmobiliariajonathan.modelo.Inmueble;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.inmobiliariajonathan.databinding.FragmentInmueblesBinding;
 
 
 public class InmueblesFragment extends Fragment {
-    //import com.example.inmobiliariajonathan.databinding.FragmentInmueblesBinding;
-    private RecyclerView rvInmuebles;
+
     private InmueblesViewModel inmueblesViewModel;
     private InmuebleAdapter adapter;
-    private Context context;
+    private FragmentInmueblesBinding binding;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_inmuebles, container, false);
-        context = root.getContext();
+        binding = FragmentInmueblesBinding.inflate(inflater, container, false);
 
-        // obtengo el id del boton flotante
-        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //al dar click navego al xml de crear inmueble
-                Navigation.findNavController((Activity) context, R.id.nav_host_fragment_content_main).navigate(R.id.crarInmuebleFragment);
-            }
+        binding.fab.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.crarInmuebleFragment);
         });
-        inicializar(root);
-        return root;
+
+        inicializar();
+
+        return binding.getRoot();
     }
-    private void inicializar(View view) {
 
-        rvInmuebles = view.findViewById(R.id.rvInmuebles);
+    private void inicializar() {
+        inmueblesViewModel = new ViewModelProvider(this).get(InmueblesViewModel.class);
 
-        inmueblesViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmueblesViewModel.class);
-        inmueblesViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
-            @Override
-            public void onChanged(List<Inmueble> inmuebles) {
-                GridLayoutManager gridLayoutManager= new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
-                rvInmuebles.setLayoutManager(gridLayoutManager);
-                adapter = new InmuebleAdapter(context, inmuebles, getLayoutInflater());
-                rvInmuebles.setAdapter(adapter);
+        inmueblesViewModel.getInmuebles().observe(getViewLifecycleOwner(), inmuebles -> {
+            if (inmuebles != null) {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+                binding.rvInmuebles.setLayoutManager(gridLayoutManager);
+
+                adapter = new InmuebleAdapter(getContext(), inmuebles);
+                binding.rvInmuebles.setAdapter(adapter);
             }
         });
+
         inmueblesViewModel.cargarInmuebles();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

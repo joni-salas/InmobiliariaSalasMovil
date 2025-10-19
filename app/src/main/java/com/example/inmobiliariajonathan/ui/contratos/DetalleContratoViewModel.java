@@ -9,59 +9,54 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.inmobiliariajonathan.modelo.Contrato;
 import com.example.inmobiliariajonathan.modelo.Inmueble;
 import com.example.inmobiliariajonathan.request.ApiClient;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetalleContratoViewModel extends AndroidViewModel {
-    private MutableLiveData<Contrato> contrato;
-    private Context context;
-    private ApiClient api;
-    private ApiClient.RetrofitService rfs;
+
+    private final MutableLiveData<Contrato> contrato = new MutableLiveData<>();
+    private final Context context;
+    private final ApiClient api;
+    private final ApiClient.RetrofitService rfs;
 
     public DetalleContratoViewModel(@NonNull Application application) {
         super(application);
-        context = application.getBaseContext();
+        context = application.getApplicationContext();
         api = new ApiClient();
-        rfs=ApiClient.getMyApiClient();
+        rfs = ApiClient.getMyApiClient();
     }
 
     public LiveData<Contrato> getContrato() {
-        if (contrato == null) {
-            contrato = new MutableLiveData<>();
-        }
         return contrato;
     }
 
     public void cargarInmuebleAlquilados(Bundle bundle) {
+        if (bundle == null) return;
+
         Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
+        if (inmueble == null) return;
 
-        Call<Contrato> contratoXID = rfs.cargarContrato(inmueble.getIdInmueble(),api.getToken(context));
-
+        Call<Contrato> contratoXID = rfs.cargarContrato(inmueble.getIdInmueble(), api.getToken(context));
         contratoXID.enqueue(new Callback<Contrato>() {
             @Override
             public void onResponse(Call<Contrato> call, Response<Contrato> response) {
-                if(response.isSuccessful()){
-                    contrato.setValue(response.body());
-                }else{
-                    Log.d("Error onresponse: ", response.message());
+                if (response.isSuccessful()) {
+                    contrato.postValue(response.body());
+                } else {
+                    Log.d("DetalleContratoVM", "Error onResponse: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Contrato> call, Throwable t) {
-                Log.d("Error onFailure: ", t.getLocalizedMessage());
+                Log.d("DetalleContratoVM", "Error onFailure: " + t.getLocalizedMessage());
             }
         });
-
-
     }
 }

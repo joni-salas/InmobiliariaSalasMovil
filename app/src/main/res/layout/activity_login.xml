@@ -54,12 +54,13 @@
         android:id="@+id/btLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="172dp"
         android:backgroundTint="#A01D1E"
         android:text="@string/login"
         android:textColor="@color/white"
+
         app:iconTint="#A01D1E"
-        app:layout_constraintBottom_toTopOf="@+id/btOlvidecontrasena"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,20 +76,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNombre"
         app:layout_constraintVertical_bias="0.575"
         app:srcCompat="@drawable/imageniniciorojofinal" />
-
-    <Button
-        android:id="@+id/btOlvidecontrasena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
-        android:backgroundTint="#A01D1E"
-        android:text="Olvide mi Contraseña"
-        android:textColor="@color/white"
-        app:iconTint="#A01D1E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

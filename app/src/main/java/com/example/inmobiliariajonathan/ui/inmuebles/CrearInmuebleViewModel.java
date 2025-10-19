@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
@@ -32,8 +34,15 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
     private ApiClient.RetrofitService rfs;
     private ApiClient api;
     private Context context;
+    private MutableLiveData<Boolean> inmuebleCreadoMutable = new MutableLiveData<>();
+    private MutableLiveData<String> mensajeMutable = new MutableLiveData<>();
+    public LiveData<Boolean> getInmuebleCreadoMutable() {
+        return inmuebleCreadoMutable;
+    }
+    public LiveData<String> getMensajeMutable() {
+        return mensajeMutable;
+    }
 
-    Boolean resultado = false;
 
     public CrearInmuebleViewModel(@NonNull Application application) {
         super(application);
@@ -56,34 +65,34 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
         return imgDeCode;
     }
 
-    public boolean crearInmueble(Inmueble inmueble){
+    public void crearInmueble(Inmueble inmueble){
         api = new ApiClient();
-        rfs=ApiClient.getMyApiClient();
-        Call<Inmueble> crearInmueble=rfs.crearInmueble(inmueble,api.getToken(context));
+        rfs = ApiClient.getMyApiClient();
+
+        Call<Inmueble> crearInmueble = rfs.crearInmueble(inmueble, api.getToken(context));
 
         crearInmueble.enqueue(new Callback<Inmueble>() {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(context,"Inmueble creado correctamente",Toast.LENGTH_LONG).show();
-                    resultado =true;
-                    //Navigation.findNavController((Activity) context, R.id.inmuebleFragment).navigate(R.id.nav_inmueble);
-                }else{
-                    Log.d("Error OnResponse: ", response.message());
-                    Toast.makeText(context,"Error al crear inmueble",Toast.LENGTH_LONG).show();
-                    resultado = false;
+                if (response.isSuccessful()) {
+                    mensajeMutable.postValue("Inmueble creado correctamente ✅");
+                    inmuebleCreadoMutable.postValue(true);
+                } else {
+                    Log.d("Error OnResponse", response.message());
+                    mensajeMutable.postValue("Error al crear el inmueble ❌");
+                    inmuebleCreadoMutable.postValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<Inmueble> call, Throwable t) {
-                Log.d("Error onFailure: ", t.getLocalizedMessage());
+                Log.d("Error onFailure", t.getLocalizedMessage());
+                inmuebleCreadoMutable.postValue(false);
+                mensajeMutable.postValue("Fallo la conexión con el servidor");
             }
         });
-
-        return resultado;
-
     }
+
 
 
 

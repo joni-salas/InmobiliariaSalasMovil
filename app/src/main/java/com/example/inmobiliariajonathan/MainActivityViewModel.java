@@ -19,44 +19,44 @@ import retrofit2.Response;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-    private ApiClient apiClient;
-    private Context context;
+    private final ApiClient apiClient;
+    private final Context context;
+
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
         apiClient = new ApiClient();
-        context = application.getApplicationContext(); // obtengo el contexto asi cuando extiende de AndroidViewModel
+        context = application.getApplicationContext();
     }
 
-    //setea en el Navigation el nombre y email del usuario logeado
-    public void inicializarEncabezado(NavigationView navigationView){
-
+    /**
+     * Inicializa el header del NavigationView con nombre y email del usuario logueado
+     */
+    public void inicializarEncabezado(NavigationView navigationView) {
+        // Obtener el header como View
         View header = navigationView.getHeaderView(0);
-        //ImageView foto = header.findViewById(R.id.);
-        TextView nombre = header.findViewById(R.id.NombreHeader);
-        TextView email = header.findViewById(R.id.EmailHeader);
 
-        Call<Propietario> propietarioCall = apiClient.getMyApiClient().getUsuarioActual(apiClient.getToken(context));
+        // Hacer cast seguro a TextView
+        TextView tvNombre = header.findViewById(R.id.NombreHeader);
+        TextView tvEmail = header.findViewById(R.id.EmailHeader);
 
-        propietarioCall.enqueue(new Callback<Propietario>() {
+        // Llamada a API para obtener usuario actual
+        Call<Propietario> call = apiClient.getMyApiClient().getUsuarioActual(apiClient.getToken(context));
+        call.enqueue(new Callback<Propietario>() {
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
-                if (response.isSuccessful()){
-                    Propietario p = response.body();
-
-                    nombre.setText(p.getNombre());
-                    email.setText(p.getEmail());
-                }else{
-                    Toast.makeText(context,"PERFIL NOT SUCCESSFUL:",Toast.LENGTH_LONG).show();
+                if (response.isSuccessful() && response.body() != null) {
+                    Propietario propietario = response.body();
+                    tvNombre.setText(propietario.getNombre());
+                    tvEmail.setText(propietario.getEmail());
+                } else {
+                    Toast.makeText(context, "Error al cargar perfil", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Propietario> call, Throwable t) {
-                Toast.makeText(context,"ERROR CARGAR PERFIL: "+t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error al cargar perfil: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
-
 }

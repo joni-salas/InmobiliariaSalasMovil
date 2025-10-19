@@ -26,7 +26,6 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mapa;
     private LatLng INMOBILIARIA = new LatLng(-33.1850233, -66.3127732);
 
-    private TextView tvHome;
 
     private FragmentInicioBinding binding;
 
